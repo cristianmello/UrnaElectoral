@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urna</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="" th:href="@{/css/global.css}" />
+</head>
+
+<body>
+    <div class="bodyBackground">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #373a3c;">
+            <div class="container">
+                <a class="fontTitle" href="/candidatos/home">Urna electoral</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-font" href="/candidatos/registrarCandidato">Registrar candidato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-font" href="/primerTurno/elecciones">Realizar elecciones</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="container py-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-body bg-dark">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="text-center text-light">Votación Primer Turno</h1>
+                            </div>
+                            <th:block th:include="mensageValidacion"></th:block>
+
+                            <div class="row">
+                                <div class="col-md-12 p-2">
+                                    <div class="card h-100 card-body bg-light">
+                                        <form method="post" class="container">
+                                            <div class="form-group mt-5">
+                                                <label for="candidato text-dark">Presidentes</label>
+                                                <div class="input-group mb-3">
+                                                    <button class="btn btn-outline-secondary bg-dark text-light"
+                                                        type="button">seleccione
+                                                        un Presidente</button>
+                                                    <select class="form-select" name="candidato" id="presidenteId">
+                                                        <option th:each="candidato:${candidatos}"
+                                                            th:if="${candidato.getTipoCargo.equals('Presidente')}"
+                                                            th:text="${candidato.getNombreCandidato()}"
+                                                            th:value="${candidato.getCodigoCandidato()}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row container">
+                                                <button id="btnCancelarPresidente" type="button"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Cancelar
+                                                    voto
+                                                </button>
+                                                <button id="btnConfirmarPresidente" type="button"
+                                                    class="btn bg-dark text-light col-md-4">Confirmar
+                                                    voto
+                                                </button>
+                                                <button id="btnEnviarPresidente" type="submit"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Enviar
+                                                    voto
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                        <form method="post" class="container">
+                                            <div class="form-group mt-5">
+                                                <label for="candidato" class="text-dark">Gobernadores</label>
+                                                <div class="input-group mb-3">
+                                                    <button class="btn btn-outline-secondary bg-dark text-light"
+                                                        type="button">seleccione
+                                                        un gobernador</button>
+                                                    <select class="form-select" name="candidato" id="gobernadorId"
+                                                        aria-readonly="true">
+                                                        <option th:each="candidato:${candidatos}"
+                                                            th:if="${candidato.tipoCargo.equals('Gobernador')}"
+                                                            th:text="${candidato.getNombreCandidato()}"
+                                                            th:value="${candidato.getCodigoCandidato()}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row container">
+                                                <button id="btnCancelarGobernador" type="button"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Cancelar
+                                                    voto
+                                                </button>
+                                                <button id="btnConfirmarGobernador" type="button"
+                                                    class="btn bg-dark text-light col-md-4">Confirmar
+                                                    voto
+                                                </button>
+                                                <button id="btnEnviarGobernador" type="submit"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Enviar
+                                                    voto
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                        <form method="post" class="container">
+                                            <div class="form-group mt-5">
+                                                <label for="candidato" class="text-dark">Senadores</label>
+                                                <div class="input-group mb-3">
+                                                    <button class="btn btn-outline-secondary bg-dark text-light"
+                                                        type="button">seleccione
+                                                        un Senador</button>
+                                                    <select class="form-select" name="candidato" id="senadorId">
+                                                        <option th:each="candidato:${candidatos}"
+                                                            th:if="${candidato.tipoCargo.equals('Senador')}"
+                                                            th:text="${candidato.getNombreCandidato()}"
+                                                            th:value="${candidato.getCodigoCandidato()}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row container">
+                                                <button id="btnCancelarSenador" type="button"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Cancelar
+                                                    voto
+                                                </button>
+                                                <button id="btnConfirmarSenador" type="button"
+                                                    class="btn bg-dark text-light col-md-4">Confirmar
+                                                    voto
+                                                </button>
+                                                <button id="btnEnviarSenador" type="submit"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Enviar
+                                                    voto
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                        <form method="post" class="container">
+                                            <div class="form-group mt-5">
+                                                <label for="candidato" class="text-dark">Diputados
+                                                    Federales</label>
+                                                <div class="input-group mb-3">
+                                                    <button class="btn btn-outline-secondary bg-dark text-light"
+                                                        type="button">seleccione
+                                                        un Diputado Federal</button>
+                                                    <select class="form-select" name="candidato" id="federalId">
+                                                        <option th:each="candidato:${candidatos}"
+                                                            th:if="${candidato.tipoCargo.equals('Diputado Federal')}"
+                                                            th:text="${candidato.getNombreCandidato()}"
+                                                            th:value="${candidato.getCodigoCandidato()}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row container">
+                                                <button id="btnCancelarFederal" type="button"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Cancelar
+                                                    voto
+                                                </button>
+                                                <button id="btnConfirmarFederal" type="button"
+                                                    class="btn bg-dark text-light col-md-4">Confirmar
+                                                    voto
+                                                </button>
+                                                <button id="btnEnviarFederal" type="submit"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Enviar
+                                                    voto
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                        <form method="post" class="container">
+                                            <div class="form-group mt-5">
+                                                <label for="candidato" class="text-dark">Diputados
+                                                    Estatales</label>
+                                                <div class="input-group mb-3">
+                                                    <button class="btn btn-outline-secondary bg-dark text-light"
+                                                        type="button">seleccione
+                                                        un Diputado Estatal</button>
+                                                    <select class="form-select" name="candidato" id="estatalId">
+                                                        <option th:each="candidato:${candidatos}"
+                                                            th:if="${candidato.tipoCargo.equals('Diputado Estatal')}"
+                                                            th:text="${candidato.getNombreCandidato()}"
+                                                            th:value="${candidato.getCodigoCandidato()}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row container">
+
+                                                <button id="btnCancelarEstatal" type="button"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Cancelar
+                                                    voto
+                                                </button>
+                                                <button id="btnConfirmarEstatal" type="button"
+                                                    class="btn bg-dark text-light col-md-4">Confirmar
+                                                    voto
+                                                </button>
+                                                <button id="btnEnviarEstatal" type="submit"
+                                                    class="btn bg-dark text-light col-md-4" disabled>Enviar voto
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <div class="row mt-5">
+                                            <a
+                                                th:href="@{/primerTurno/resultados}">
+                                                <button type="button"
+                                                    class="btn btn-outline-secondary bg-dark text-light col-md-12">
+                                                    Finalizar Primer Turno
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center">
+        <div class="container p-4">
+            <h1>&copy; Cristian Mello</h1>
+            <p>2001 - 2002</p>
+            <p>All right Reserverd</p>
+        </div>
+    </footer>
+
+    </div>
+
+    <script>
+        document.getElementById('btnConfirmarPresidente').addEventListener('click', () => {
+            document.getElementById('btnEnviarPresidente').disabled = false;
+            document.getElementById('btnConfirmarPresidente').disabled = true
+            document.getElementById('btnCancelarPresidente').disabled = false;
+            document.getElementById('presidenteId').classList.add("disabledOptions")
+
+        })
+
+        document.getElementById('btnConfirmarGobernador').addEventListener('click', () => {
+            document.getElementById('btnEnviarGobernador').disabled = false;
+            document.getElementById('btnConfirmarGobernador').disabled = true;
+            document.getElementById('btnCancelarGobernador').disabled = false;
+            document.getElementById('gobernadorId').classList.add("disabledOptions")
+
+        })
+
+        document.getElementById('btnConfirmarSenador').addEventListener('click', () => {
+            document.getElementById('btnEnviarSenador').disabled = false;
+            document.getElementById('btnConfirmarSenador').disabled = true;
+            document.getElementById('btnCancelarSenador').disabled = false;
+            document.getElementById('senadorId').classList.add("disabledOptions")
+
+        })
+
+        document.getElementById('btnConfirmarFederal').addEventListener('click', () => {
+            document.getElementById('btnEnviarFederal').disabled = false;
+            document.getElementById('btnConfirmarFederal').disabled = true;
+            document.getElementById('btnCancelarFederal').disabled = false;
+            document.getElementById('federalId').classList.add("disabledOptions")
+
+        })
+
+        document.getElementById('btnConfirmarEstatal').addEventListener('click', () => {
+            document.getElementById('btnEnviarEstatal').disabled = false;
+            document.getElementById('btnConfirmarEstatal').disabled = true;
+            document.getElementById('btnCancelarEstatal').disabled = false;
+            document.getElementById('estatalId').classList.add("disabledOptions")
+
+        })
+
+
+        //boton cancelar
+
+        document.getElementById('btnCancelarPresidente').addEventListener('click', () => {
+            document.getElementById('btnEnviarPresidente').disabled = true;
+            document.getElementById('btnConfirmarPresidente').disabled = false
+            document.getElementById('btnCancelarPresidente').disabled = true;
+            document.getElementById('presidenteId').classList.remove("disabledOptions")
+
+        })
+
+        document.getElementById('btnCancelarGobernador').addEventListener('click', () => {
+            document.getElementById('btnEnviarGobernador').disabled = true;
+            document.getElementById('btnConfirmarGobernador').disabled = false;
+            document.getElementById('btnCancelarGobernador').disabled = true;
+            document.getElementById('gobernadorId').classList.remove("disabledOptions")
+
+        })
+
+        document.getElementById('btnCancelarSenador').addEventListener('click', () => {
+            document.getElementById('btnEnviarSenador').disabled = true;
+            document.getElementById('btnConfirmarSenador').disabled = false;
+            document.getElementById('btnCancelarSenador').disabled = true;
+            document.getElementById('senadorId').classList.remove("disabledOptions")
+
+        })
+
+        document.getElementById('btnCancelarFederal').addEventListener('click', () => {
+            document.getElementById('btnEnviarFederal').disabled = true;
+            document.getElementById('btnConfirmarFederal').disabled = false;
+            document.getElementById('btnCancelarFederal').disabled = true;
+            document.getElementById('federalId').classList.remove("disabledOptions")
+
+        })
+
+        document.getElementById('btnCancelarEstatal').addEventListener('click', () => {
+            document.getElementById('btnEnviarEstatal').disabled = true;
+            document.getElementById('btnConfirmarEstatal').disabled = false;
+            document.getElementById('btnCancelarEstatal').disabled = true;
+            document.getElementById('estatalId').classList.remove("disabledOptions")
+
+        })
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

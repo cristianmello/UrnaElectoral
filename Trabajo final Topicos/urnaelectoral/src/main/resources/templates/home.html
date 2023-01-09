@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urna</title>
+    <link rel="stylesheet" type="text/css" href="" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="bodyBackground">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #373a3c;">
+            <div class="container">
+                <a class="fontTitle" href="home">Urna electoral</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-font" href="registrarCandidato">Registrar candidato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-font" href="/primerTurno/elecciones">Realizar elecciones</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="container py-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-body bg-dark">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="text-center text-light">Candidatos</h1>
+                            </div>
+                            <div class="col-md-4 p-2" th:each="candidato:${candidatos}">
+                                <div class="card h-100 card-body">
+                                    <h3 th:text="${candidato.nombreCandidato + ' - ' + candidato.tipoCargo}">
+                                    </h3>
+                                    <div class="buttonsDelEdit"><a
+                                            th:href="@{/candidatos/update/{codigoCandidato}(codigoCandidato=${candidato.codigoCandidato})}"><i
+                                                class="fa-solid fa-pen-to-square iconsEditDelete"></i></a>
+                                        <a
+                                            th:href="@{/candidatos/delete/{codigoCandidato}(codigoCandidato=${candidato.codigoCandidato})}"><i
+                                                class="fa-solid fa-trash iconsEditDelete"></i></a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-dark text-light text-center">
+            <div class="container p-4">
+                <h1>&copy; Cristian Mello</h1>
+                <p>2001 - 2002</p>
+                <p>All right Reserverd</p>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

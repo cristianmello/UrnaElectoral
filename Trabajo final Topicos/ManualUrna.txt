@@ -1,0 +1,31 @@
+Pasos:
+
+1)-Iniciar servidor Xampp, puerto 3306
+
+2)-Abrir MySQL Workbench con los scripts incluidos en la 
+carpeta del trabajo, y ejecutar las consultas, ó utilizar phpMyAdmin
+ y crear la base de datos llamada: "urnaelectronica"
+
+3)- Abrir la carpeta con el codigo fuente de la aplicacion y ejecutar la misma, esto creará las 
+tablas si no estan creadas.
+
+4)-Abrir el navegador e ingresar la URL:  http://localhost:8080/candidatos/home
+
+5)-Registrar Candidatos ingresando datos correspondientes.
+
+6)-Realizar elecciones confirmando eleccion y enviando datos, esto se realiza hasta las veces necesarias.
+
+7)-Clickear Finalizar primer turno, esto enviara a la pagina de resultados, el cual se podra observar 
+los porcentajes especificos de cada candidato, agrupado segun tipo de cargo del candidato.
+
+8)-Al clickear mas abajo "confirmar" podran suceder 2 eventos:
+
+8.1)-En el caso de que un presidente y un gobernador posean mas del 50% de votos finalizara la eleccion 
+actual mostrando los resultados de los candidatos electos.
+
+8.2)-En el caso de que un presidente, gobernador, o ambos no superen el 50% se realizara un segundo turno, 
+en el que se votara por los 2 candidatos de cada cargo(Si se es necesario), al clickear finalizar segundo 
+turno se mostraran los resultados de los candidatos electos.
+
+9) Luego del punto anterior se podra seleccionar finalizar eleccion, en el que se borraran todos los registros de 
+todas las bases de datos, para poder realizar otro proceso de eleccion.
