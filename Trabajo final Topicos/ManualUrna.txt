@@ -11,7 +11,9 @@ tablas si no estan creadas.
 
 4)-Abrir el navegador e ingresar la URL:  http://localhost:8080/candidatos/home
 
-5)-Registrar Candidatos ingresando datos correspondientes.
+5)-Registrar Candidatos ingresando datos correspondientes, en el caso de que 
+algun dato este mal ingresado puede modificarlo clickeando en el icono de modificar ubicado en la pagina inicial 
+abajo del candidato registrado correspondiente.
 
 6)-Realizar elecciones confirmando eleccion y enviando datos, esto se realiza hasta las veces necesarias.
 
